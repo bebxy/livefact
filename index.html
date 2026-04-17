@@ -3,316 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LiveFact - A Dynamic Benchmark for LLM-Driven Fake News Detection. Coming Soon.">
-    <title>LiveFact | Coming Soon</title>
+    <meta name="description" content="LiveFact - Next Generation Benchmark for LLM-Driven Fake News Detection">
+    <title>LiveFact | LLM-Driven Fake News Detection Benchmark</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #6366f1;
-            --secondary: #8b5cf6;
-            --accent: #ec4899;
-            --dark: #0f172a;
-            --darker: #020617;
-            --text: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: rgba(148, 163, 184, 0.1);
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--dark);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Animated background */
-        .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 60%);
-            z-index: -1;
-            animation: pulse 8s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        /* Floating particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: float 15s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
-            100% { 
-                transform: translateY(-100px) scale(1);
-                opacity: 0;
-            }
-        }
-
-        /* Main container */
-        .container {
-            text-align: center;
-            padding: 2rem;
-            max-width: 700px;
-            animation: fadeIn 1s ease;
-        }
-
-        @keyframes fadeIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Logo */
-        .logo {
-            font-size: 4.5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-            letter-spacing: -2px;
-            animation: gradientMove 4s ease infinite;
-            background-size: 200% 200%;
-        }
-
-        @keyframes gradientMove {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Tagline */
-        .tagline {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-            font-weight: 400;
-            line-height: 1.6;
-        }
-
-        /* Coming Soon Badge */
-        .coming-soon {
-            display: inline-block;
-            padding: 0.75rem 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 3rem;
-            box-shadow: 0 4px 30px rgba(99, 102, 241, 0.4);
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 4px 30px rgba(99, 102, 241, 0.4); }
-            50% { box-shadow: 0 4px 50px rgba(99, 102, 241, 0.6); }
-        }
-
-        /* Description */
-        .description {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 3rem;
-        }
-
-        /* Divider */
-        .divider {
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            margin: 0 auto 2.5rem;
-            border-radius: 2px;
-        }
-
-        /* Beta Access Section */
-        .beta-section {
-            background: rgba(99, 102, 241, 0.08);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .beta-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: var(--text);
-        }
-
-        .beta-text {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .email-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding: 0.75rem 1.5rem;
-            border: 2px solid var(--primary);
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .email-link:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
-        }
-
-        .email-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* Footer */
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            background: linear-gradient(to top, var(--darker), transparent);
-        }
-
-        /* Responsive */
-        @media (max-width: 640px) {
-            .logo {
-                font-size: 3rem;
-            }
-            
-            .tagline {
-                font-size: 1.1rem;
-            }
-            
-            .description {
-                font-size: 1rem;
-            }
-            
-            .container {
-                padding: 1.5rem;
-            }
-            
-            .beta-section {
-                padding: 1.5rem;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="bg-gradient"></div>
-    <div class="particles" id="particles"></div>
-
-    <div class="container">
-        <h1 class="logo">LiveFact</h1>
-        <p class="tagline">A Dynamic Benchmark for LLM-Driven Fake News Detection</p>
-        
-        <div class="coming-soon">Coming Soon</div>
-        
-        <p class="description">
-            A next-generation evaluation framework designed to rigorously assess Large Language Models' capabilities in misinformation detection under real-world conditions.
-        </p>
-
-        <div class="divider"></div>
-
-        <div class="beta-section">
-            <h2 class="beta-title">🚀 Join the Beta Program</h2>
-            <p class="beta-text">
-                Interested in early access to LiveFact? We're looking for researchers and practitioners to participate in our beta testing program.
-            </p>
-            <a href="mailto:contact@bebxy.com" class="email-link">
-                <svg class="email-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-                contact@bebxy.com
-            </a>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="logo">LiveFact</span>
+                <span class="badge">BETA</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#leaderboard">Leaderboard</a></li>
+                <li><a href="#methodology">Methodology</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
-    </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">LiveFact</span>
+                </h1>
+                <p class="hero-subtitle">Next Generation Benchmark for LLM-Driven Fake News Detection</p>
+                <p class="hero-description">
+                    Evaluating the capabilities of Large Language Models in detecting and analyzing misinformation in real-time scenarios
+                </p>
+                <div class="hero-buttons">
+                    <a href="#leaderboard" class="btn btn-primary">View Results</a>
+                    <a href="https://github.com/bebxy/livefact" class="btn btn-secondary" target="_blank">Learn More</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="running-months">6</span>
+                        <span class="stat-label">Running Months</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="test-cases">26K+</span>
+                        <span class="stat-label">Test Cases</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="categories">7</span>
+                        <span class="stat-label">Categories</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About LiveFact</h2>
+            <p class="section-subtitle">A comprehensive benchmark designed to evaluate LLM performance in fake news detection</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Real-Time Testing</h3>
+                    <p>Evaluate models on current events and emerging misinformation patterns</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Comprehensive Metrics</h3>
+                    <p>Multi-dimensional evaluation across temporal dimensions: before, during, and after event occurrence</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Continuous Updates</h3>
+                    <p>Regular benchmark updates to reflect the evolving landscape of misinformation</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Global Coverage</h3>
+                    <p>Testing across world-wide events and emerging misinformation patterns</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <section id="leaderboard" class="leaderboard">
+        <div class="container">
+            <h2 class="section-title">Leaderboard</h2>
+            <p class="section-subtitle">Current rankings of LLM models on LiveFact benchmark</p>
+
+            <!-- Version Selector -->
+            <div class="version-selector">
+                <button class="version-nav-btn" id="prev-version" aria-label="Previous version">
+                    <span class="arrow">←</span>
+                </button>
+                <div class="version-display">
+                    <span class="current-version" id="current-version">November 2025</span>
+                </div>
+                <button class="version-nav-btn" id="next-version" aria-label="Next version">
+                    <span class="arrow">→</span>
+                </button>
+            </div>
+
+            <div class="table-container">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Model</th>
+                            <th>Organization</th>
+                            <th class="sortable" data-metric="overall">
+                                Overall Score <span class="sort-indicator"></span>
+                            </th>
+                            <th class="sortable" data-metric="before_cls">
+                                Before Event (CLS) <span class="sort-indicator"></span>
+                            </th>
+                            <th class="sortable" data-metric="before_inf">
+                                Before Event (INF) <span class="sort-indicator"></span>
+                            </th>
+                            <th class="sortable" data-metric="during_cls">
+                                During Event (CLS) <span class="sort-indicator"></span>
+                            </th>
+                            <th class="sortable" data-metric="during_inf">
+                                During Event (INF) <span class="sort-indicator"></span>
+                            </th>
+                            <th class="sortable" data-metric="after_cls">
+                                After Event (CLS) <span class="sort-indicator"></span>
+                            </th>
+                            <th class="sortable" data-metric="after_inf">
+                                After Event (INF) <span class="sort-indicator"></span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-body">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section id="methodology" class="methodology">
+        <div class="container">
+            <h2 class="section-title">Methodology</h2>
+            <p class="section-subtitle">How we evaluate LLM performance on fake news detection</p>
+
+            <div class="methodology-content">
+                <div class="method-step">
+                    <div class="step-number">01</div>
+                    <h3>Dataset Collection</h3>
+                    <p>We curate a diverse dataset of verified true and false news from multiple sources, covering current global events.</p>
+                </div>
+                <div class="method-step">
+                    <div class="step-number">02</div>
+                    <h3>Temporal Analysis</h3>
+                    <p>Each news item is tested at three temporal points: before, during, and after the event occurrence to evaluate temporal reasoning.</p>
+                </div>
+                <div class="method-step">
+                    <div class="step-number">03</div>
+                    <h3>Model Evaluation</h3>
+                    <p>Each model is tested on identical prompts and evaluated based on accuracy, confidence calibration, and reasoning quality.</p>
+                </div>
+                <div class="method-step">
+                    <div class="step-number">04</div>
+                    <h3>Continuous Updates</h3>
+                    <p>The benchmark is updated regularly with new test cases to reflect emerging misinformation trends.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get Involved</h2>
+            <p class="section-subtitle">Join our community and contribute to advancing fake news detection research</p>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>Submit Your Model</h3>
+                    <p>Have a model you'd like to see on the leaderboard? Submit it for evaluation.</p>
+                    <a href="https://forms.gle/s1L4xkorBq8brKua7" class="btn btn-outline" target="_blank">Submit Model</a>
+                </div>
+                <div class="contact-card">
+                    <h3>Access Dataset</h3>
+                    <p>Download the LiveFact dataset and evaluation scripts for your research on Hugging Face.</p>
+                    <a href="https://huggingface.co/bebxy" class="btn btn-outline" target="_blank">Download Dataset</a>
+                </div>
+                <div class="contact-card">
+                    <h3>Contribute</h3>
+                    <p>Join the LiveFact maintenance team and participate in the ongoing research and development of this benchmark.</p>
+                    <a href="https://forms.gle/msAhMz7EM6jGsfSy9" class="btn btn-outline" target="_blank">Join the Team</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer">
-        © 2025 LiveFact. All rights reserved.
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>LiveFact</h4>
+                    <p>Next generation benchmark for LLM-driven fake news detection</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#leaderboard">Leaderboard</a></li>
+                        <li><a href="#methodology">Methodology</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://github.com/bebxy/livefact" target="_blank">GitHub</a></li>
+                        <li><a href="https://huggingface.co/bebxy" target="_blank">HuggingFace</a></li>
+                        <li><a href="https://arxiv.org/abs/2604.04815" target="_blank">Paper</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:contact@bebxy.com">Email</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Bebxy &copy; 2025-<span id="current-year"></span></p>
+            </div>
+            <script>
+                document.getElementById("current-year").textContent = new Date().getFullYear();
+            </script>
+        </div>
     </footer>
 
-    <script>
-        // Create floating particles
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = 30;
-
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 15 + 's';
-            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-            particle.style.width = (Math.random() * 3 + 2) + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.opacity = Math.random() * 0.3 + 0.1;
-            particlesContainer.appendChild(particle);
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
