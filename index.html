@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LiveFact - Next Generation Benchmark for LLM-Driven Fake News Detection">
-    <title>LiveFact | LLM-Driven Fake News Detection Benchmark</title>
+    <meta name="description" content="LiveFact — a dynamic, time-aware benchmark and leaderboard for LLM-driven fake news detection, refreshed monthly from Google News' World topic.">
+    <title>LiveFact | A Dynamic, Time-Aware Benchmark for LLM-Driven Fake News Detection</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="scroll-progress" id="scroll-progress"></div>
+
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="container">
+        <div class="container navbar-inner">
             <div class="nav-brand">
                 <span class="logo">LiveFact</span>
-                <span class="badge">BETA</span>
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
@@ -38,29 +39,30 @@
         <div class="hero-background"></div>
         <div class="container">
             <div class="hero-content">
+                <p class="eyebrow">A Dynamic, Time-Aware Benchmark &middot; ACL 2026</p>
                 <h1 class="hero-title">
                     <span class="gradient-text">LiveFact</span>
                 </h1>
-                <p class="hero-subtitle">Next Generation Benchmark for LLM-Driven Fake News Detection</p>
+                <p class="hero-subtitle">Can LLMs reason under the "fog of war," or just recite what they memorized?</p>
                 <p class="hero-description">
-                    Evaluating the capabilities of Large Language Models in detecting and analyzing misinformation in real-time scenarios
+                    LiveFact scores models against evidence sliced at three days before, on, and three days after each news event broke &mdash; using fresh events from Google News' World topic, refreshed every month so the test set is always unseen.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#leaderboard" class="btn btn-primary">View Results</a>
-                    <a href="https://github.com/bebxy/livefact" class="btn btn-secondary" target="_blank">Learn More</a>
+                    <a href="#leaderboard" class="btn btn-primary">View Leaderboard</a>
+                    <a href="https://aclanthology.org/2026.acl-long.546/" class="btn btn-secondary" target="_blank" rel="noopener">Read the Paper</a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <span class="stat-number" id="running-months">6</span>
+                        <span class="stat-number" id="running-months">&mdash;</span>
                         <span class="stat-label">Running Months</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number" id="test-cases">26K+</span>
-                        <span class="stat-label">Test Cases</span>
+                        <span class="stat-number" id="test-claims">&mdash;</span>
+                        <span class="stat-label">Claims Evaluated</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number" id="categories">7</span>
-                        <span class="stat-label">Categories</span>
+                        <span class="stat-number" id="models-evaluated">&mdash;</span>
+                        <span class="stat-label">Models Evaluated</span>
                     </div>
                 </div>
             </div>
@@ -71,28 +73,56 @@
     <section id="about" class="about">
         <div class="container">
             <h2 class="section-title">About LiveFact</h2>
-            <p class="section-subtitle">A comprehensive benchmark designed to evaluate LLM performance in fake news detection</p>
+            <p class="section-subtitle">A continuously updated benchmark that tests reasoning under real-time uncertainty &mdash; not memorized recall</p>
 
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Real-Time Testing</h3>
-                    <p>Evaluate models on current events and emerging misinformation patterns</p>
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                    </div>
+                    <h3>Fog-of-War Testing</h3>
+                    <p>Every claim is evaluated at three time slices &mdash; using only the evidence that existed 3 days before, on, and 3 days after the event's headline date.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Comprehensive Metrics</h3>
-                    <p>Multi-dimensional evaluation across temporal dimensions: before, during, and after event occurrence</p>
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="5" cy="12" r="2.4" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none" opacity="0.65"/><circle cx="19" cy="12" r="2.4" fill="currentColor" stroke="none" opacity="0.3"/></svg>
+                    </div>
+                    <h3>Real / Fake / Ambiguous</h3>
+                    <p>Claims aren't forced into a binary verdict. "Ambiguous" is a correct answer in its own right whenever the evidence genuinely can't support a verdict yet.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Continuous Updates</h3>
-                    <p>Regular benchmark updates to reflect the evolving landscape of misinformation</p>
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.1"/><circle cx="6" cy="18" r="2.1"/><circle cx="18" cy="12" r="2.1"/><path d="M6 8.1V15.9M8 6.9L16 11M8 17.1L16 13"/></svg>
+                    </div>
+                    <h3>Dual-Mode Evaluation</h3>
+                    <p>Classification Mode checks factual accuracy against the final, time-invariant truth. Inference Mode checks whether a model knows when it doesn't know yet.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3>Global Coverage</h3>
-                    <p>Testing across world-wide events and emerging misinformation patterns</p>
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 6 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-6-3.8-9s1.3-6.3 3.8-9z"/></svg>
+                    </div>
+                    <h3>Monthly, World-Only Refresh</h3>
+                    <p>LiveFact draws exclusively from Google News' World topic and refreshes every month with unseen events, keeping every release a genuine zero-shot test.</p>
+                </div>
+            </div>
+
+            <div class="fog-timeline">
+                <div class="fog-node" data-phase="before">
+                    <span class="fog-dot"></span>
+                    <span class="fog-label">T &minus; 3 days</span>
+                    <span class="fog-sub">Little confirming evidence yet &mdash; correct answer is usually "Ambiguous"</span>
+                </div>
+                <div class="fog-connector"></div>
+                <div class="fog-node" data-phase="during">
+                    <span class="fog-dot"></span>
+                    <span class="fog-label">T &middot; headline day</span>
+                    <span class="fog-sub">Evidence starts to confirm Real or Fake</span>
+                </div>
+                <div class="fog-connector"></div>
+                <div class="fog-node" data-phase="after">
+                    <span class="fog-dot"></span>
+                    <span class="fog-label">T + 3 days</span>
+                    <span class="fog-sub">Evidence has settled &mdash; the verdict is clear</span>
                 </div>
             </div>
         </div>
@@ -102,19 +132,39 @@
     <section id="leaderboard" class="leaderboard">
         <div class="container">
             <h2 class="section-title">Leaderboard</h2>
-            <p class="section-subtitle">Current rankings of LLM models on LiveFact benchmark</p>
+            <p class="section-subtitle">Current rankings of LLMs on the LiveFact benchmark</p>
+            <p class="section-note"><span aria-hidden="true">&#127760;</span> Every claim is sourced from Google News' World section, refreshed monthly.</p>
 
-            <!-- Version Selector -->
-            <div class="version-selector">
-                <button class="version-nav-btn" id="prev-version" aria-label="Previous version">
-                    <span class="arrow">←</span>
-                </button>
-                <div class="version-display">
-                    <span class="current-version" id="current-version">November 2025</span>
+            <div class="leaderboard-controls">
+                <div class="version-selector">
+                    <button class="version-nav-btn" id="prev-version" aria-label="Previous version">
+                        <span class="arrow">&larr;</span>
+                    </button>
+                    <div class="version-display">
+                        <span class="current-version" id="current-version">November 2025</span>
+                        <span class="version-meta" id="version-meta"></span>
+                    </div>
+                    <button class="version-nav-btn" id="next-version" aria-label="Next version">
+                        <span class="arrow">&rarr;</span>
+                    </button>
                 </div>
-                <button class="version-nav-btn" id="next-version" aria-label="Next version">
-                    <span class="arrow">→</span>
+            </div>
+
+            <div class="metric-controls">
+                <div class="metric-toggle" data-mode="acc">
+                    <button class="metric-btn active" data-mode-btn="acc" type="button" aria-pressed="true">Accuracy</button>
+                    <button class="metric-btn" data-mode-btn="f1" type="button" aria-pressed="false">F1-Macro</button>
+                </div>
+                <button class="legend-btn" id="legend-toggle" type="button" aria-expanded="false" aria-controls="legend-panel">
+                    <span aria-hidden="true">&#9432;</span> How to read this table
                 </button>
+            </div>
+
+            <div class="legend-panel" id="legend-panel" hidden>
+                <p><strong>CLS &mdash; Classification Mode:</strong> the model must commit to Real or Fake against the final, time-invariant ground truth, even if the evidence available at that moment can't support it yet.</p>
+                <p><strong>INF &mdash; Inference Mode:</strong> the ground truth adapts to the evidence slice &mdash; "Ambiguous" is the <em>correct</em> answer when there isn't enough evidence yet.</p>
+                <p><strong>Before / During / After:</strong> evidence available 3 days before, on, and 3 days after the event's headline date (T&minus;3 / T / T+3).</p>
+                <p class="legend-callout">A high <strong>Before-Event CLS</strong> score is not necessarily good news &mdash; it can mean the model is confidently guessing with no real evidence yet. Watch <strong>Before-Event INF</strong> instead: strong models score high there by correctly answering "Ambiguous."</p>
             </div>
 
             <div class="table-container">
@@ -124,8 +174,8 @@
                             <th>Rank</th>
                             <th>Model</th>
                             <th>Organization</th>
-                            <th class="sortable" data-metric="overall">
-                                Overall Score <span class="sort-indicator"></span>
+                            <th class="sortable sort-desc" data-metric="overall">
+                                Overall Avg. <span class="sort-indicator"></span>
                             </th>
                             <th class="sortable" data-metric="before_cls">
                                 Before Event (CLS) <span class="sort-indicator"></span>
@@ -159,28 +209,33 @@
     <section id="methodology" class="methodology">
         <div class="container">
             <h2 class="section-title">Methodology</h2>
-            <p class="section-subtitle">How we evaluate LLM performance on fake news detection</p>
+            <p class="section-subtitle">How each monthly LiveFact release is built</p>
 
             <div class="methodology-content">
                 <div class="method-step">
                     <div class="step-number">01</div>
-                    <h3>Dataset Collection</h3>
-                    <p>We curate a diverse dataset of verified true and false news from multiple sources, covering current global events.</p>
+                    <h3>Event Retrieval</h3>
+                    <p>We scrape trending stories from Google News' World topic daily at 00:00 GMT, then deduplicate and filter down to a core set of distinct, high-impact events.</p>
                 </div>
                 <div class="method-step">
                     <div class="step-number">02</div>
-                    <h3>Temporal Analysis</h3>
-                    <p>Each news item is tested at three temporal points: before, during, and after the event occurrence to evaluate temporal reasoning.</p>
+                    <h3>Time-Sliced Evidence</h3>
+                    <p>For every event we build three evidence sets anchored to its headline date &mdash; T&minus;3, T, and T+3 &mdash; simulating the real-world "fog of war" of incomplete information.</p>
                 </div>
                 <div class="method-step">
                     <div class="step-number">03</div>
-                    <h3>Model Evaluation</h3>
-                    <p>Each model is tested on identical prompts and evaluated based on accuracy, confidence calibration, and reasoning quality.</p>
+                    <h3>Claim &amp; Context Generation</h3>
+                    <p>An LLM drafts neutral background context plus a balanced set of Real, Fake, and Ambiguous claims for each event, grounded in the retrieved evidence.</p>
                 </div>
                 <div class="method-step">
                     <div class="step-number">04</div>
-                    <h3>Continuous Updates</h3>
-                    <p>The benchmark is updated regularly with new test cases to reflect emerging misinformation trends.</p>
+                    <h3>Human-in-the-Loop Verification</h3>
+                    <p>Every claim and label goes through independent expert review rounds against the source evidence before it's accepted into the release.</p>
+                </div>
+                <div class="method-step">
+                    <div class="step-number">05</div>
+                    <h3>Dual-Mode Scoring</h3>
+                    <p>Models are scored in Classification Mode (fixed ground truth) and Inference Mode (evidence-adjusted ground truth) at each of the three time slices.</p>
                 </div>
             </div>
         </div>
@@ -196,18 +251,38 @@
                 <div class="contact-card">
                     <h3>Submit Your Model</h3>
                     <p>Have a model you'd like to see on the leaderboard? Submit it for evaluation.</p>
-                    <a href="https://forms.gle/s1L4xkorBq8brKua7" class="btn btn-outline" target="_blank">Submit Model</a>
+                    <a href="https://forms.gle/s1L4xkorBq8brKua7" class="btn btn-outline" target="_blank" rel="noopener">Submit Model</a>
                 </div>
                 <div class="contact-card">
                     <h3>Access Dataset</h3>
                     <p>Download the LiveFact dataset and evaluation scripts for your research on Hugging Face.</p>
-                    <a href="https://huggingface.co/bebxy" class="btn btn-outline" target="_blank">Download Dataset</a>
+                    <a href="https://huggingface.co/bebxy" class="btn btn-outline" target="_blank" rel="noopener">Download Dataset</a>
                 </div>
                 <div class="contact-card">
                     <h3>Contribute</h3>
-                    <p>Join the LiveFact maintenance team and participate in the ongoing research and development of this benchmark.</p>
-                    <a href="https://forms.gle/msAhMz7EM6jGsfSy9" class="btn btn-outline" target="_blank">Join the Team</a>
+                    <p>Join the LiveFact maintenance team and help run the ongoing monthly benchmark cycle.</p>
+                    <a href="https://forms.gle/msAhMz7EM6jGsfSy9" class="btn btn-outline" target="_blank" rel="noopener">Join the Team</a>
                 </div>
+            </div>
+
+            <div class="citation-panel">
+                <div class="citation-info">
+                    <h3>Cite This Work</h3>
+                    <p>If LiveFact is useful in your research, please cite our ACL 2026 paper.</p>
+                    <button class="btn btn-outline copy-btn" id="copy-bibtex" type="button">Copy BibTeX</button>
+                </div>
+                <pre class="bibtex" id="bibtex-block">@inproceedings{xu2026livefact,
+    title = "{L}ive{F}act: A Dynamic, Time-Aware Benchmark for {LLM}-Driven Fake News Detection",
+    author = "Xu, Cheng  and  Jin, Changhong  and  Niu, Yingjie  and  Yan, Nan  and  Mei, Yuke  and  Guan, Shuhao  and  Chen, Liming  and  Kechadi, Tahar",
+    booktitle = "Proceedings of the 64th Annual Meeting of the {A}ssociation for {C}omputational {L}inguistics (Volume 1: Long Papers)",
+    month = jul,
+    year = "2026",
+    address = "San Diego, California, United States",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.acl-long.546/",
+    doi = "10.18653/v1/2026.acl-long.546",
+    pages = "11881--11910"
+}</pre>
             </div>
         </div>
     </section>
@@ -218,7 +293,8 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>LiveFact</h4>
-                    <p>Next generation benchmark for LLM-driven fake news detection</p>
+                    <p>A continuously updated benchmark &amp; leaderboard for LLM-driven fake news detection.</p>
+                    <p class="last-updated" id="last-updated"></p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -232,9 +308,9 @@
                 <div class="footer-section">
                     <h4>Resources</h4>
                     <ul>
-                        <li><a href="https://github.com/bebxy/livefact" target="_blank">GitHub</a></li>
-                        <li><a href="https://huggingface.co/bebxy" target="_blank">HuggingFace</a></li>
-                        <li><a href="https://arxiv.org/abs/2604.04815" target="_blank">Paper</a></li>
+                        <li><a href="https://github.com/bebxy/livefact" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://huggingface.co/bebxy" target="_blank" rel="noopener">HuggingFace</a></li>
+                        <li><a href="https://aclanthology.org/2026.acl-long.546/" target="_blank" rel="noopener">Paper</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
